@@ -13,12 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $name = request('name');
-    return view('welcome', [
-        'name' => $name
-    ]);
-});
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
 
 
