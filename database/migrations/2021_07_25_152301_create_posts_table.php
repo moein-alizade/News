@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();
             $table->string('title');
             $table->text('body');
-            
+
 // ایجاد فیلد های تاریخ ایجاد و آپدیت
             $table->timestamps();
         });
