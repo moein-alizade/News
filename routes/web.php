@@ -15,28 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
+Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'create']);
 
+// Route::post => قراره فرستاده شود post چون اطلاعات از نوع
+Route::post('/posts/store', [\App\Http\Controllers\PostController::class, 'store']);
 
 Route::get('/posts/{slug}', [\App\Http\Controllers\PostController::class, 'show']);
-
-
-
-// action or response => function (){return 'hi';}
-Route::get('/hi', function () {
-
-    // dd(request()->all());
-    // dd(request('name'));
-
-
-    // $name = "moein";
-    // $_GET => وارد می کند url گرفتن اسم کاربر که خودش توسط
-    // $name = $_GET['name'];
-    // $age = $_GET['age'];
-
-
-    // Simplified top code
-    $name = request('name');
-    $age = request('age');
-    return 'hi ' . $name . ' you are ' . $age . " years old";
-
-});
