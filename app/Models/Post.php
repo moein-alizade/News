@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
+    // فیلدهایی که توسط کاربر قابل مقداردهی هستند (خوش بینانه)
+    //    protected $fillable = [
+    //        'slug', 'title', 'body'
+    //    ];
+
+    // فیلدهایی که توسط کاربر قابل مقداردهی نیستند (بد بینانه)
+    protected $guarded = [];
 }

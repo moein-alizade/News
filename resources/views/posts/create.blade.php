@@ -16,7 +16,7 @@
                                 <input type="text" name="slug" class="form-control" placeholder="Subject" />
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" rows="5" placeholder="Message"></textarea>
+                                <textarea name="body" class="form-control" rows="5" placeholder="Message"></textarea>
                             </div>
                             <div><button class="btn" type="submit">Send Message</button></div>
                         </form>
