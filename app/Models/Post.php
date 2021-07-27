@@ -16,4 +16,11 @@ class Post extends Model
 
     // فیلدهایی که توسط کاربر قابل مقداردهی نیستند (بد بینانه)
     protected $guarded = [];
+
+    // تغییر فیلد موردنظر در روت مدل بایدینگ
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }

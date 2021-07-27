@@ -20,4 +20,4 @@ Route::get('/posts/create', [\App\Http\Controllers\PostController::class, 'creat
 // Route::post => قراره فرستاده شود post چون اطلاعات از نوع
 Route::post('/posts/store', [\App\Http\Controllers\PostController::class, 'store']);
 
-Route::get('/posts/{slug}', [\App\Http\Controllers\PostController::class, 'show']);
+Route::get('/posts/{post}', [\App\Http\Controllers\PostController::class, 'show']);

@@ -43,12 +43,16 @@ class PostController extends Controller
 
 
     // show post
-    public function show($slug)
+    // public function show($slug)
+    // Route Model Binding
+    public function show(Post $post)
     {
 // توسط مدل پست اولین رکوردی که عنوانش با عنوان درخواست شده کاربر برابر بود را باز می گرداند
-        $post = Post::query()->where('slug', $slug)->firstOrFail();
 
-        return view('post', [
+        // Route model binding => دستور زیر را خودش اجرا می کند
+        // $post = Post::query()->where('slug', $slug)->firstOrFail();
+
+        return view('posts.show', [
            'post' => $post
         ]);
     }
