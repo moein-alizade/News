@@ -19,6 +19,16 @@ class PostController extends Controller
         // نمایش تمام اطلاعاتی که می فرستیم
         // dd($request->all());
 
+        // اعتبار سنجی
+        // $this->validate(لیست قوانین، داده هایی که کاربر می فرستد);
+        $this->validate($request, [
+            // 'unique:post,slug' => فیلد،جدول:یکتا
+            'slug' => ['required', 'unique:posts,slug'],
+            'title' => ['required'],
+            'body' => ['required']
+        ]);
+
+
         // create()  => این تابع برای ایجاد رکورد جدید در دیتابیس هست
         Post::query()->create([
            'slug' => $request->get('slug'),
