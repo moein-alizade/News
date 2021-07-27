@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewPostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -14,19 +15,19 @@ class PostController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(NewPostRequest $request)
     {
         // نمایش تمام اطلاعاتی که می فرستیم
         // dd($request->all());
 
         // اعتبار سنجی
         // $this->validate(لیست قوانین، داده هایی که کاربر می فرستد);
-        $this->validate($request, [
-            // 'unique:post,slug' => فیلد،جدول:یکتا
-            'slug' => ['required', 'unique:posts,slug'],
-            'title' => ['required'],
-            'body' => ['required']
-        ]);
+        //        $this->validate($request, [
+        //            // 'unique:post,slug' => فیلد،جدول:یکتا
+        //            'slug' => ['required', 'unique:posts,slug'],
+        //            'title' => ['required'],
+        //            'body' => ['required']
+        //        ]);
 
 
         // create()  => این تابع برای ایجاد رکورد جدید در دیتابیس هست
