@@ -23,7 +23,7 @@
                             <img src="/img/news-825x525.jpg" />
                         </div>
                         <div class="sn-content">
-                            <h1 class="sn-title">{{   $post->title   }}</h1>
+                            <h1 class="sn-title">{{   $post->title   }} <a href="/posts/{{$post->slug}}/edit" class="btn btn-primary btn-sm">edit</a> </h1>
                             {{   $post->body   }}
                         </div>
                     </div>

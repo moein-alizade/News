@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewPostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -55,6 +56,44 @@ class PostController extends Controller
         return view('posts.show', [
            'post' => $post
         ]);
+    }
+
+    public function edit(Post $post)
+    {
+        return view('posts.edit', [
+            // $post => به صفحه ای که مشخص کردیم این متغیر پاس داده می شود
+            'post' => $post
+        ]);
+    }
+
+    // Request $request => داده هایی که کاربر می فرستد
+    // Post $post => Route model binding
+    public function update(UpdatePostRequest $request, Post $post)
+    {
+
+// داخل جدول  post می گردیم که آیا این اسلاگ قبلا استفاده شده و یا نه و اگه استفاده شده باید برای پستی غیر از پستی که در حال حاضر در حال ویرایش اش هستیم، استفاده شده باشد و اگه نه ارور لازم نیست
+    // اگه اسلاگ فرستاده شده فقط برای پست فعلی وجود داره آنگاه نباید خطای یکتا نبودن اسلاگ را نشان بدهد
+        $slugExists = Post::query()->where('slug', $request->get('slug'))
+// آیدی برابر نباشد با آیدی پست فعلی مون
+            ->where('id', '!=', $post->id)
+            ->exists();
+
+
+        if($slugExists)
+        {
+// به صفحه ی قبلی بازگرد و خطای ما را هم اعلان کن
+            return redirect()->back()->withErrors(['slug' => 'the slug already been taken']);
+        }
+
+
+
+       $post->update([
+            'slug' => $request->get('slug'),
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+       ]);
+
+       return redirect(('/'));
     }
 
 }
