@@ -27,3 +27,5 @@ Route::get('/posts/{post}/edit', [\App\Http\Controllers\PostController::class, '
 Route::patch('/posts/{post}', [\App\Http\Controllers\PostController::class, 'update']);
 
 Route::get('/posts/{post}', [\App\Http\Controllers\PostController::class, 'show']);
+
+Route::delete('/posts/{post}', [\App\Http\Controllers\PostController::class, 'destroy']);

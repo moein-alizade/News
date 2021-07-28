@@ -24,6 +24,13 @@
                         </div>
                         <div class="sn-content">
                             <h1 class="sn-title">{{   $post->title   }} <a href="/posts/{{$post->slug}}/edit" class="btn btn-primary btn-sm">edit</a> </h1>
+
+                            <form action="/posts/{{$post->slug}}" method="post">
+                                @csrf
+                                @method('delete')
+                                <input type="submit" class="btn btn-danger btn-sm" value="delete">
+                            </form>
+
                             {{   $post->body   }}
                         </div>
                     </div>

@@ -67,7 +67,7 @@ class PostController extends Controller
     }
 
     // Request $request => داده هایی که کاربر می فرستد
-    // Post $post => Route model binding
+    // Post $post => پاس داده می شود Route model binding و url از طریق
     public function update(UpdatePostRequest $request, Post $post)
     {
 
@@ -94,6 +94,14 @@ class PostController extends Controller
        ]);
 
        return redirect(('/'));
+    }
+
+    public function destroy(Post $post)
+    {
+        // delete this post
+        $post->delete();
+
+        return redirect('/');
     }
 
 }
