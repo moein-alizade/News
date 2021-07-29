@@ -30,6 +30,8 @@ Route::get('/posts/{post}', [\App\Http\Controllers\PostController::class, 'show'
 
 Route::delete('/posts/{post}', [\App\Http\Controllers\PostController::class, 'destroy']);
 
+Route::get('/categories', [\App\Http\Controllers\CategoryController::class, 'index']);
+
 Route::get('/categories/create', [\App\Http\Controllers\CategoryController::class, 'create']);
 
 Route::post('/categories/store', [\App\Http\Controllers\CategoryController::class, 'store']);
