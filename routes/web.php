@@ -35,3 +35,7 @@ Route::get('/categories', [\App\Http\Controllers\CategoryController::class, 'ind
 Route::get('/categories/create', [\App\Http\Controllers\CategoryController::class, 'create']);
 
 Route::post('/categories/store', [\App\Http\Controllers\CategoryController::class, 'store']);
+
+Route::get('/categories/{category}/edit', [\App\Http\Controllers\CategoryController::class, 'edit']);
+
+Route::patch('/categories/{category}', [\App\Http\Controllers\CategoryController::class, 'update']);
