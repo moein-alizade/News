@@ -18,6 +18,20 @@
                                 <input type="text" name="slug" class="form-control" placeholder="Subject" value="{{   $post->slug   }}" />
                             </div>
                             <div class="form-group">
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option value="" disabled selected>Select category ...</option>
+                                    @foreach($categories as $category)
+                                        <option
+                                            {{--   نمایش دسته بندی که از قبل انتخاب شده است  --}}
+                                            @if($category->id == $post->category_id)
+                                                selected
+                                            @endif
+                                        value="{{$category->id}}">{{$category->title}}</option>
+
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <textarea name="body" class="form-control" rows="5" placeholder="Message">{{   $post->body   }}</textarea>
                             </div>
                             <div><button class="btn" type="submit">Send Message</button></div>

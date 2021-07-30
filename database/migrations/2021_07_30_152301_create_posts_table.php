@@ -17,6 +17,8 @@ class CreatePostsTable extends Migration
 // ایجاد فیلد آیدی به عنوان کلید اصلی و بدون علامت
             $table->id();
 
+            // constrained() => رابطه ی بین جداول را پیاده سازی می کند
+            $table->foreignId('category_id')->constrained();
             $table->string('slug')->unique();
             $table->string('title');
             $table->text('body');

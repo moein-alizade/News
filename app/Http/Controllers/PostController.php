@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NewPostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,10 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+// نمایش تمام دسته بندی ها در صفحه ی ایجاد مقاله
+        return view('posts.create', [
+            'categories' => Category::all()
+        ]);
     }
 
 
@@ -33,6 +37,7 @@ class PostController extends Controller
 
         // create()  => این تابع برای ایجاد رکورد جدید در دیتابیس هست
         Post::query()->create([
+            'category_id' => $request->get('category_id'),
            'slug' => $request->get('slug'),
            'title' => $request->get('title'),
            'body' => $request->get('body'),
@@ -62,7 +67,8 @@ class PostController extends Controller
     {
         return view('posts.edit', [
             // $post => به صفحه ای که مشخص کردیم این متغیر پاس داده می شود
-            'post' => $post
+            'post' => $post,
+            'categories' => Category::all(),
         ]);
     }
 
@@ -87,7 +93,9 @@ class PostController extends Controller
 
 
 
+        // ذخیره در دیتابیس
        $post->update([
+            'category_id' => $request->get('category_id'),
             'slug' => $request->get('slug'),
             'title' => $request->get('title'),
             'body' => $request->get('body'),

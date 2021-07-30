@@ -26,6 +26,8 @@ class NewPostRequest extends FormRequest
         return [
             // اعتبار سنجی
             'slug' => ['required', 'unique:posts,slug'],
+// exists => برای چک کردن اینکه آیدی که به سمت ما می آید بصورت رندوم نباشه و قصد مختل کردن سایت ما نباشد
+            'category_id' => ['required', 'exists:categories,id'],
             'title' => ['required'],
             'body' => ['required']
         ];

@@ -16,6 +16,14 @@
                                 <input type="text" name="slug" class="form-control" placeholder="Subject" />
                             </div>
                             <div class="form-group">
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option value="" disabled selected>Select category ...</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->title}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <textarea name="body" class="form-control" rows="5" placeholder="Message"></textarea>
                             </div>
                             <div><button class="btn" type="submit">Send Message</button></div>
