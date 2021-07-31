@@ -39,3 +39,5 @@ Route::post('/categories/store', [\App\Http\Controllers\CategoryController::clas
 Route::get('/categories/{category}/edit', [\App\Http\Controllers\CategoryController::class, 'edit']);
 
 Route::patch('/categories/{category}', [\App\Http\Controllers\CategoryController::class, 'update']);
+
+Route::delete('/categories/{category}', [\App\Http\Controllers\CategoryController::class, 'destroy']);
