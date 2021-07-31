@@ -10,6 +10,20 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    // show posts
+    public function index()
+    {
+        // گرفتن تمامی پست ها توسط مدل پست
+        $post = Post::all();
+        $categories = Category::all();
+
+// دیتا های مد نظرمان را داخل متغیرpost پاس می دهیم
+        return view('posts.index', [
+            'posts' => $post,
+            'categories' => $categories
+        ]);
+    }
+
 
     public function create()
     {
