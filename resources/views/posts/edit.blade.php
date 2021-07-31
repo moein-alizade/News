@@ -38,7 +38,7 @@
                         </form>
                     </div>
 
-                    @include('layouts.errors')
+                    @include('layout.errors')
 
                 </div>
                 <div class="col-md-4">

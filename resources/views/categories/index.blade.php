@@ -14,6 +14,6 @@
         @endforeach
     </ul>
 
-    @include('layouts.errors')
+    @include('layout.errors')
 
 @endsection

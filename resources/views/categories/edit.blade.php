@@ -18,7 +18,7 @@
                             <div><button class="btn" type="submit">Send Message</button></div>
                         </form>
 
-                        @include('layouts.errors')
+                        @include('layout.errors')
 
                     </div>
                 </div>

@@ -7,14 +7,22 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <div class="contact-form">
-                        <form action="/categories/store" method="POST">
+                        <form action="/register/store" method="POST">
                             @csrf
-                            <h2>Create new category</h2>
+                            <h2>Welcome to Our website</h2>
                             <div class="form-group">
-                                <input type="text" name="title" class="form-control" placeholder="Title" />
+                                <input type="text" name="name" class="form-control" placeholder="name" />
                             </div>
-
-                            <div><button class="btn" type="submit">Send Message</button></div>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" placeholder="email" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="mobile" class="form-control" placeholder="mobile" />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control" placeholder="password" />
+                            </div>
+                            <div><button class="btn" type="submit">register</button></div>
                         </form>
 
                         @include('layout.errors')
