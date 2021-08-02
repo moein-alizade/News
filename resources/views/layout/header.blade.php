@@ -96,7 +96,23 @@
                         </div>
                     </div>
                     <a href="/posts/create" class="nav-item nav-link">New Post</a>
-                    <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+
+
+                    {{-- @auth = if   =>       یعنی اگه کاربر لاگین بود فلان کار رو انجام بده و اگه نه فلان کار دیگه را انجام بده                   --}}
+                    @auth
+                        <a href="" class="nav-item nav-link">
+                            <form action="/logout" method="post">
+                                @csrf
+                                @method('delete')
+                                <input type="submit" class="btn btn-danger btn-md" value="logout">
+                            </form>
+                        </a>
+                    @else
+                        <a href="/login" class="nav-item nav-link">Login</a>
+                    @endauth
+
+
+
                 </div>
                 <div class="social ml-auto">
                     <a href=""><i class="fab fa-twitter"></i></a>

@@ -41,3 +41,5 @@ Route::post('/register/store', [\App\Http\Controllers\RegisterController::class,
 
 Route::get('/login', [\App\Http\Controllers\LoginController::class, 'create']);
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'store']);
+// logout => session حذف
+Route::delete('/logout', [\App\Http\Controllers\LoginController::class, 'destroy']);
