@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class RegisterController extends Controller
         return view('authenticate.create');
     }
 
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
         $user = User::query()->create([
            'name' => $request->get('name') ,
