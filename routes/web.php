@@ -37,3 +37,7 @@ Route::delete('/categories/{category}', [\App\Http\Controllers\CategoryControlle
 
 Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'create']);
 Route::post('/register/store', [\App\Http\Controllers\RegisterController::class, 'store']);
+
+
+Route::get('/login', [\App\Http\Controllers\LoginController::class, 'create']);
+Route::post('/login', [\App\Http\Controllers\LoginController::class, 'store']);
