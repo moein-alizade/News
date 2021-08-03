@@ -43,3 +43,8 @@ Route::get('/login', [\App\Http\Controllers\LoginController::class, 'create']);
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'store']);
 // logout => session حذف
 Route::delete('/logout', [\App\Http\Controllers\LoginController::class, 'destroy']);
+
+
+Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show']);
+Route::get('/profile/edit', [\App\Http\Controllers\ProfileController::class, 'edit']);
+Route::patch('/profile/update', [\App\Http\Controllers\ProfileController::class, 'update']);

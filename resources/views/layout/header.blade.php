@@ -100,6 +100,7 @@
 
                     {{-- @auth = if   =>       یعنی اگه کاربر لاگین بود فلان کار رو انجام بده و اگه نه فلان کار دیگه را انجام بده                   --}}
                     @auth
+                        <a href="/profile" class="nav-item nav-link">Profile</a>
                         <a href="" class="nav-item nav-link">
                             <form action="/logout" method="post">
                                 @csrf
