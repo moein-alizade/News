@@ -51,3 +51,5 @@ Route::patch('/profile/update', [\App\Http\Controllers\ProfileController::class,
 
 // show list roles
 Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'index']);
+Route::get('/roles/create', [\App\Http\Controllers\RoleController::class, 'create']);
+Route::post('/roles/store', [\App\Http\Controllers\RoleController::class, 'store']);
