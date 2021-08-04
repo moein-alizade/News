@@ -48,3 +48,6 @@ Route::delete('/logout', [\App\Http\Controllers\LoginController::class, 'destroy
 Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show']);
 Route::get('/profile/edit', [\App\Http\Controllers\ProfileController::class, 'edit']);
 Route::patch('/profile/update', [\App\Http\Controllers\ProfileController::class, 'update']);
+
+// show list roles
+Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'index']);
