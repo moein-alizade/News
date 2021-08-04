@@ -15,7 +15,7 @@ class CreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            // unique() = چون مقایسه هامون بر اساس عنوان هست
+            // unique() = چون مقایسه هامون بر اساس عنوان ها هست
             $table->string('title')->unique();
             $table->timestamps();
         });
