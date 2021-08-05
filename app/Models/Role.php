@@ -9,4 +9,11 @@ class Role extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    // نقش تعداد زیادی می تواند دسترسی داشته باشد
+    public function permissions()
+    {
+        // N to N
+        return $this->belongsToMany(Permission::class);
+    }
 }

@@ -14,6 +14,15 @@
                                 <input type="text" name="title" class="form-control" placeholder="Title" />
                             </div>
 
+                            <div class="from-group">
+                                @foreach($permissions as $permission)
+                                    <lable class="ml-2">
+                                    {{--   name="permissions[]" => عنوانش را باید بصورت یک آرایه پاس بدهیم زیرا مجموعه ی دسترسی در نهایت قرار هست بررسی شود  --}}
+                                        <input type="checkbox" name="permissions[]" value="{{$permission->id}}">{{$permission->title}}
+                                    </lable>
+                                @endforeach
+                            </div>
+
                             <div><button class="btn" type="submit">Submit</button></div>
                         </form>
 

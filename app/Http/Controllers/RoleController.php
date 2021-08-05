@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewRoleRequest;
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -19,14 +20,27 @@ class RoleController extends Controller
 
     public function create()
     {
-        return view('roles.create');
+        // permission pass to roles.create view
+        return view('roles.create', [
+            'permissions' => Permission::all()
+        ]);
     }
 
     public function store(NewRoleRequest $request)
     {
-        Role::query()->create([
+        // آیدی های دسترسی های مد نظرمان در داخل این آرایه دسترسی ها هستند
+        // dd($request->get('permissions'));
+
+
+        $role = Role::query()->create([
             'title' => $request->get('title')
+
         ]);
+
+        // اختصاص دادن دسترسی ها به این نقشی که ایجاد کردیم
+        // permissions() => رابطه ای که توی مدل نقش تعریف کردیم
+        // attach() =>  دسترسی هایی که سمت دیتابیس مان بعنوان دسترسی های این رول فرستادیم برای اون رول خاص اضافه می شوند
+        $role->permissions()->attach($request->get('permissions'));
 
         return redirect('/roles');
     }
