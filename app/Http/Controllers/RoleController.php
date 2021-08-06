@@ -44,4 +44,13 @@ class RoleController extends Controller
 
         return redirect('/roles');
     }
+
+    public function edit(Role $role)
+    {
+        // پاس دادن ویژگی ها به صفحه  ویرایش نقش ها
+        return view('roles.edit', [
+            'role' => $role,
+            'permissions' => Permission::all()
+        ]);
+    }
 }

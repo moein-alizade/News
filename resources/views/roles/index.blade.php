@@ -20,7 +20,7 @@
                     <tr>
                         <th scope="row">{{$role->id}}</th>
                         <td>{{$role->title}}</td>
-                        <td>-</td>
+                        <td><a href="/roles/{{$role->id}}" class="btn btn-primary btn-sm">Edit</a></td>
                         <td>-</td>
                     </tr>
                 @endforeach
