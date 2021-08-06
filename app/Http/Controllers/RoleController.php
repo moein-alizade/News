@@ -53,4 +53,32 @@ class RoleController extends Controller
             'permissions' => Permission::all()
         ]);
     }
+
+
+    public function update(NewRoleRequest $request, Role $role)
+    {
+        $role->update([
+           'title' => $request->get('title')
+        ]);
+
+        // Update permissions
+        // sync() => هم اضافه می کند و هم حذف می کند یعنی کل تغییرات را برای ما مدیریت می کند
+        $role->permissions()->sync($request->get('permissions'));
+
+        return redirect('/roles');
+    }
+
+
+    public function destroy(Role $role)
+    {
+        // گرفتن یا غیرفعال کردن دسترسی های این رول تا بشود آنرا حذف کنیم
+        // delete() => حذف می کند permissions ققط از جدول
+        // detach() => از جدول میانی که تعریف کردیم یک سری رکورد ها را طبق چیزی که دادیم برای ما حذف می کند (permission_role)
+        $role->permissions()->detach();
+
+        $role->delete();
+
+        return redirect('/roles');
+
+    }
 }

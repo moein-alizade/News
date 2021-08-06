@@ -54,3 +54,5 @@ Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'index']);
 Route::get('/roles/create', [\App\Http\Controllers\RoleController::class, 'create']);
 Route::post('/roles/store', [\App\Http\Controllers\RoleController::class, 'store']);
 Route::get('/roles/{role}', [\App\Http\Controllers\RoleController::class, 'edit']);
+Route::patch('/roles/{role}', [\App\Http\Controllers\RoleController::class, 'update']);
+Route::delete('/roles/{role}', [\App\Http\Controllers\RoleController::class, 'destroy']);
