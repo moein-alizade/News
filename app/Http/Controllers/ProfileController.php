@@ -9,10 +9,6 @@ class ProfileController extends Controller
 {
     public function show()
     {
-        if (!auth()->check())
-        {
-            abort('401');
-        }
         // نمایش اطلاعات کاربر فعلی که لاگین کرده است
         return view('profile.show',[
            'user' => auth()->user()
