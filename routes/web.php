@@ -16,17 +16,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\PostController::class, 'index']);
 
 
-Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'create']);
-Route::post('/register/store', [\App\Http\Controllers\RegisterController::class, 'store']);
+Route::middleware('guest')->group(function() {
+    Route::get('/login', [\App\Http\Controllers\LoginController::class, 'create'])->name('login');
+    Route::post('/login', [\App\Http\Controllers\LoginController::class, 'store']);
 
-
-Route::get('/login', [\App\Http\Controllers\LoginController::class, 'create'])->name('login');
-Route::post('/login', [\App\Http\Controllers\LoginController::class, 'store']);
-// logout => session حذف
-Route::delete('/logout', [\App\Http\Controllers\LoginController::class, 'destroy']);
+    Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'create']);
+    Route::post('/register/store', [\App\Http\Controllers\RegisterController::class, 'store']);
+});
 
 
 Route::middleware('auth')->group(function() {
+    // logout => session حذف
+    Route::delete('/logout', [\App\Http\Controllers\LoginController::class, 'destroy']);
+
     // show list roles
     Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'index']);
     Route::get('/roles/create', [\App\Http\Controllers\RoleController::class, 'create']);
@@ -61,4 +63,3 @@ Route::middleware('auth')->group(function() {
 
 
 Route::get('/posts/{post}', [\App\Http\Controllers\PostController::class, 'show']);
-
