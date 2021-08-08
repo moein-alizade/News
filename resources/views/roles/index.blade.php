@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <h1 class="m-4">Roles <a href="/roles/create" class="btn btn-success">Add new role</a></h1>
+        <h1 class="m-4"><a href="/roles/create" class="btn btn-success">Add new role</a></h1>
         <table class="table m-4">
             <thead>
             <tr>

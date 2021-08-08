@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'role_id',
         'name',
         'email',
         'mobile',
@@ -41,4 +43,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // تعریف رابطه یک به یک برای اینکه هر یوزر می تواند یک نقشی داشته باشد
+    // توی رابطه یک به یک، اسم تابع حتما باید مفرد باشد
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
 }

@@ -56,6 +56,17 @@ Route::middleware('auth')->group(function() {
     Route::delete('/categories/{category}', [\App\Http\Controllers\CategoryController::class, 'destroy']);
 
 
+    // Users list
+    Route::get('/users', [\App\Http\Controllers\UserController::class, 'index']);
+    // تغییر اطلاعات کاربران
+    Route::get('/users/{user}/edit', [\App\Http\Controllers\UserController::class, 'edit']);
+// آپدیت اطلاعات کاربر
+    Route::patch('/users/{user}', [\App\Http\Controllers\UserController::class, 'update']);
+// حذف اطلاعات کاربر
+    Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy']);
+
+
+
     Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show']);
     Route::get('/profile/edit', [\App\Http\Controllers\ProfileController::class, 'edit']);
     Route::patch('/profile/update', [\App\Http\Controllers\ProfileController::class, 'update']);

@@ -35,6 +35,30 @@ class PermissionSeeder extends Seeder
         ]);
 
 
+
+        /**
+         * user permission
+         * اضافه کردن دسترسی های کاربران
+         */
+
+        // Permission = model
+        Permission::query()->insert([
+            [
+                'title' => 'create-user'
+            ],
+            [
+                'title' => 'read-user'
+            ],
+            [
+                'title' => 'update-user'
+            ],
+            [
+                'title' => 'delete-user'
+            ],
+        ]);
+
+
+
         /**
          * post permission
          */
