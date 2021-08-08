@@ -14,11 +14,12 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        /**
+         * category permission
+         */
+
         // Permission = model
         Permission::query()->insert([
-            /**
-             * category permission
-             */
             [
                 'title' => 'create-category'
             ],
@@ -31,11 +32,13 @@ class PermissionSeeder extends Seeder
             [
                 'title' => 'delete-category'
             ],
+        ]);
 
 
-            /**
-             * post permission
-             */
+        /**
+         * post permission
+         */
+        Permission::query()->insert([
             [
                 'title' => 'create-post'
             ],
@@ -47,6 +50,25 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'title' => 'delete-post'
+            ],
+        ]);
+
+
+        /**
+         * role permission
+         */
+        Permission::query()->insert([
+            [
+                'title' => 'create-role'
+            ],
+            [
+                'title' => 'read-role'
+            ],
+            [
+                'title' => 'update-role'
+            ],
+            [
+                'title' => 'delete-role'
             ],
         ]);
     }
