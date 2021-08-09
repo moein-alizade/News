@@ -10,11 +10,16 @@ class Role extends Model
     use HasFactory;
     protected $guarded = [];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+
     // نقش تعداد زیادی می تواند دسترسی داشته باشد
     public function permissions()
     {
         // N to N
-        return $this->belongsToMany(Permission::class);
+        return $this->belongsToMany(Permission::class, 'permission_role');
     }
 
 
@@ -28,4 +33,5 @@ class Role extends Model
             ->where('permission_id', $permission->id)
             ->exists();
     }
+
 }
