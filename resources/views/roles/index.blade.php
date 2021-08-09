@@ -20,12 +20,15 @@
                     <tr>
                         <th scope="row">{{$role->id}}</th>
                         <td>{{$role->title}}</td>
-                        <td><a href="/roles/{{$role->id}}" class="btn btn-primary btn-sm">Edit</a></td>
+                        <td>
+                            <a href="/roles/{{$role->id}}" class="btn btn-warning btn-sm">Edit</a></td>
                         <td>
                             <form action="/roles/{{$role->id}}" method="post">
                                 @csrf
-                                @method('delete')
-                                <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                                @method('DELETE')
+                                <div>
+                                    <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                                </div>
                             </form>
                         </td>
                     </tr>

@@ -74,8 +74,10 @@ class RoleController extends Controller
         // گرفتن یا غیرفعال کردن دسترسی های این رول تا بشود آنرا حذف کنیم
         // delete() => حذف می کند permissions ققط از جدول
         // detach() => از جدول میانی که تعریف کردیم یک سری رکورد ها را طبق چیزی که دادیم برای ما حذف می کند (permission_role)
+        // 1. غیر فعال کردن تمام دسترسی های این رول
         $role->permissions()->detach();
 
+        // 2. حذف این رول
         $role->delete();
 
         return redirect('/roles');
