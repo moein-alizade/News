@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckPermission;
 use App\Http\Requests\NewCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
@@ -9,6 +10,33 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    // روی همه کنترلر ها، این میدلور ها را با ورودی های مختلف فراخوانی بکنیم
+    public function __construct()
+    {
+        // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
+        $this->middleware(CheckPermission::class . ":read-category")
+            ->only('index');
+
+
+        // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
+        $this->middleware(CheckPermission::class . ":create-category")
+            ->only(['create', 'store']);
+
+
+        $this->middleware(CheckPermission::class . ":edit-category")
+            ->only(['edit','update']);
+
+
+
+        $this->middleware(CheckPermission::class . ":delete-category")
+            ->only('destroy');
+
+
+    }
+
+
+
 
     public function index()
     {

@@ -27,6 +27,8 @@ class Role extends Model
      * @param Permission $permission
      * @return bool
      */
+
+    // چک می کند که آیا این رول خاص، یک دسترسی خاص را دارد یا خیر
     public function hasPermission(Permission $permission)
     {
         return $this->permissions()

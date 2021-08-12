@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckPermission;
 use App\Http\Requests\NewRoleRequest;
 use App\Models\Permission;
 use App\Models\Role;
@@ -9,6 +10,33 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+
+    // روی همه کنترلر ها، این میدلور ها را با ورودی های مختلف فراخوانی بکنیم
+    public function __construct()
+    {
+        // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
+        $this->middleware(CheckPermission::class . ":read-role")
+            ->only('index');
+
+
+        // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
+        $this->middleware(CheckPermission::class . ":create-role")
+            ->only(['create', 'store']);
+
+
+        $this->middleware(CheckPermission::class . ":edit-role")
+            ->only(['edit','update']);
+
+
+
+        $this->middleware(CheckPermission::class . ":delete-role")
+            ->only('destroy');
+
+
+    }
+
+
+
    // show list roles
     public function index()
     {

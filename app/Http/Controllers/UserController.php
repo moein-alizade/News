@@ -2,12 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckPermission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    // روی همه کنترلر ها، این میدلور ها را با ورودی های مختلف فراخوانی بکنیم
+    public function __construct()
+    {
+        // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
+        $this->middleware(CheckPermission::class . ":read-user")
+            ->only('index');
+
+
+        // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
+        $this->middleware(CheckPermission::class . ":create-user")
+            ->only(['create', 'store']);
+
+
+        $this->middleware(CheckPermission::class . ":edit-user")
+            ->only(['edit','update']);
+
+
+
+        $this->middleware(CheckPermission::class . ":delete-user")
+            ->only('destroy');
+
+
+    }
+
+
+
+
     public function index()
     {
         // Seve all users in a $users
