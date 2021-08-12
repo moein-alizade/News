@@ -6,6 +6,7 @@ use App\Http\Middleware\CheckPermission;
 use App\Http\Requests\NewCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,13 +16,14 @@ class CategoryController extends Controller
     public function __construct()
     {
         // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
+        // ":read-category" => فرستادن دسترسی بعنوان ورودی یا پارامتر به سمت میدلور
         $this->middleware(CheckPermission::class . ":read-category")
             ->only('index');
 
 
         // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
-        $this->middleware(CheckPermission::class . ":create-category")
-            ->only(['create', 'store']);
+//        $this->middleware(CheckPermission::class . ":create-category")
+//            ->only(['create', 'store']);
 
 
         $this->middleware(CheckPermission::class . ":edit-category")
@@ -48,6 +50,17 @@ class CategoryController extends Controller
 
     public function create()
     {
+
+        // Call gate
+        // ability = دسترسی
+        // dd(Gate::allows('create-category'));
+
+
+        if(!Gate::allows('create-category'))
+        {
+            abort(403);
+        }
+
         return view('categories.create');
     }
 

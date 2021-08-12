@@ -25,6 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //  گیت ها تقریبا ساختاری مشابه روت ها دارند
+        // define('تابع اکشن', 'دسترسی');
+        Gate::define('create-category', function () {
+            return true;
+        });
+
     }
 }

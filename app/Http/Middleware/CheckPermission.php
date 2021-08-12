@@ -17,8 +17,6 @@ class CheckPermission
      */
     public function handle(Request $request, Closure $next, $parameter)
     {
-
-
         // می گردد اولین رکوردی که با این عنوان خاص که ما فرستادیم اگه پیدا کرد برمیگرداند و
         // اگر این عنوان وجود نداشت آنگاه به ما خطا بده این عنوان داخل دسترسی ها وجود ندارد
         $permission = Permission::query()
