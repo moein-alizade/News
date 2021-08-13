@@ -27,6 +27,7 @@ class CheckPermission
 
         // اگه دسترسی وجود نداشت، پیغام خطای زیر را نشان بده
         if(! auth()->user()->role->hasPermission($permission))
+
         {
             // 403 = دسترسی برای این قسمت سایت وجود ندارد
             abort(403);

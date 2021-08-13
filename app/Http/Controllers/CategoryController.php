@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    // روی همه کنترلر ها، این میدلور ها را با ورودی های مختلف فراخوانی بکنیم
+    // روی همه کنتر لر ها، این میدلور ها را با ورودی های مختلف فراخوانی بکنیم
     public function __construct()
     {
         // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
@@ -62,6 +62,7 @@ class CategoryController extends Controller
         }
 
         return view('categories.create');
+
     }
 
     public function store(NewCategoryRequest $request)
@@ -74,8 +75,11 @@ class CategoryController extends Controller
         return redirect('/');
     }
 
+
     public function edit(Category $category)
     {
+        Gate::authorize('edit-category', $category);
+
         return view('categories.edit', [
            'category' => $category
         ]);
@@ -85,24 +89,30 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
 
+        Gate::authorize('edit-category', $category);
+
+
         // داخل جدول  category می گردیم که آیا این عنوان قبلا استفاده شده و یا نه و اگه استفاده شده باید برای پستی غیر از پستی که در حال حاضر در حال ویرایش اش هستیم، استفاده شده باشد و اگه نه ارور لازم نیست
         // اگه عنوان فرستاده شده فقط برای پست فعلی وجود داره آنگاه نباید خطای یکتا نبودن عنوان را نشان بدهد
-        $titleExists = Category::query()->where('title', $request->get('title'))
+//        $titleExists = Category::query()->where('title', $request->get('title'))
 // آیدی برابر نباشد با آیدی پست فعلی مون
-            ->where('id', '!=', $category->id)
-            ->exists();
+//            ->where('id', '!=', $category->id)
+//            ->exists();
 
 
-        if($titleExists)
-        {
-// به صفحه ی قبلی بازگرد و خطای ما را هم اعلان کن
-            return redirect()->back()->withErrors(['title' => 'the title already been taken']);
-        }
+//        if($titleExists)
+//        {
+//// به صفحه ی قبلی بازگرد و خطای ما را هم اعلان کن
+//            return redirect()->back()->withErrors(['title' => 'the title already been taken']);
+//        }
+
+//        $category->update([
+//           'title' => $request->get('title')
+//        ]);
 
 
-        $category->update([
-           'title' => $request->get('title')
-        ]);
+        $category->update($request->only(['title']));
+
 
         return redirect('/categories');
     }
