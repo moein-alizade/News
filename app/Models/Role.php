@@ -29,14 +29,14 @@ class Role extends Model
      */
 
     // چک می کند که آیا این رول خاص، یک دسترسی خاص را دارد یا خیر
-    public function hasPermission($permission)
+    public function hasPermission(Permission $permission)
     {
-        $permission = Permission::query()->where('title', $permission)
-            ->firstOrFail();
-
+        // $this->permissions() => دسترسی های کاربر لاگین کرده را بر می گرداند
+        // exists(); => وجود دارد یا نه
         return $this->permissions()
             ->where('id', $permission->id)
             ->exists();
     }
+
 
 }

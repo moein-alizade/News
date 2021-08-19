@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Permission;
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class CheckPermission
 {
@@ -23,11 +24,13 @@ class CheckPermission
             ->where('title', $parameter)
             ->firstOrFail();
 
-        // dd(auth()->user()->role->hasPermission($permission));
+
+
+
+         // dd(auth()->user()->role->hasPermission($permission));
 
         // اگه دسترسی وجود نداشت، پیغام خطای زیر را نشان بده
-        if(! auth()->user()->role->hasPermission($permission))
-
+        if(auth()->check() && !auth()->user()->role->hasPermission($permission))
         {
             // 403 = دسترسی برای این قسمت سایت وجود ندارد
             abort(403);
@@ -36,7 +39,7 @@ class CheckPermission
 
 
 
-        // dd($parameter);
+         // dd($parameter);
         // برگرداندن اطلاعات کاربری که لاگین کرده است
         // dd(auth()->user()->toArray());
 

@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
-    // روی همه کنترلر ها، این میدلور ها را با ورودی های مختلف فراخوانی بکنیم
+    // فراخوانی میدلورها
     public function __construct()
     {
         // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
-        $this->middleware(CheckPermission::class . ":read-user")
+        $this->middleware("permission:read-user")
             ->only('index');
 
 
@@ -30,8 +30,6 @@ class UserController extends Controller
 
         $this->middleware(CheckPermission::class . ":delete-user")
             ->only('destroy');
-
-
     }
 
 

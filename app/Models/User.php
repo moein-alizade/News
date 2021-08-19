@@ -47,6 +47,11 @@ class User extends Authenticatable
 
     // تعریف رابطه یک به یک برای اینکه هر یوزر می تواند یک نقشی داشته باشد
     // توی رابطه یک به یک، اسم تابع حتما باید مفرد باشد
+    /**
+     * @var mixed
+     */
+    private $role;
+
     public function role()
     {
         return $this->belongsTo(Role::class);

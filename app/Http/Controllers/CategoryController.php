@@ -12,18 +12,17 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    // روی همه کنتر لر ها، این میدلور ها را با ورودی های مختلف فراخوانی بکنیم
+    // فراخوانی میدلورها
     public function __construct()
     {
         // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
-        // ":read-category" => فرستادن دسترسی بعنوان ورودی یا پارامتر به سمت میدلور
-        $this->middleware(CheckPermission::class . ":read-category")
+        $this->middleware("permission:read-category")
             ->only('index');
 
 
         // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
-//        $this->middleware(CheckPermission::class . ":create-category")
-//            ->only(['create', 'store']);
+        $this->middleware(CheckPermission::class . ":create-category")
+            ->only(['create', 'store']);
 
 
         $this->middleware(CheckPermission::class . ":edit-category")
@@ -33,8 +32,6 @@ class CategoryController extends Controller
 
         $this->middleware(CheckPermission::class . ":delete-category")
             ->only('destroy');
-
-
     }
 
 
@@ -65,6 +62,7 @@ class CategoryController extends Controller
 
     }
 
+
     public function store(NewCategoryRequest $request)
     {
 // ذخیره دسته بندی
@@ -76,19 +74,47 @@ class CategoryController extends Controller
     }
 
 
+
+
     public function edit(Category $category)
     {
+        //        if (!Gate::allows('edit-category', $category)){
+        //            return abort(403);
+        //        }
+        //
+        //        return view('categories.edit', [
+        //           'category' => $category
+        //        ]);
+
+
+
+        // Gate::denies('edit-category', $category) = !Gate::allows('edit-category', $category)
+        // denies() => !Gate::allows()
+        // بررسی می کند که اگه دسترسی وجود ندارد آنگاه نتیجه ی تابع  denies، صحیح خواهد بود و داخل شرط اجرا می شود
+        // if (Gate::denies('edit-category', $category)){
+        //     return abort(403);
+        // }
+
+
+
+
+
+        // authorize() => auto exception = true هویت اش درست هست یا نه
         Gate::authorize('edit-category', $category);
 
+
         return view('categories.edit', [
-           'category' => $category
+            'category' => $category
         ]);
     }
+
+
 
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
 
+        // authorize() => auto exception = true
         Gate::authorize('edit-category', $category);
 
 
@@ -102,7 +128,7 @@ class CategoryController extends Controller
 
 //        if($titleExists)
 //        {
-//// به صفحه ی قبلی بازگرد و خطای ما را هم اعلان کن
+// به صفحه ی قبلی بازگرد و خطای ما را هم اعلان کن
 //            return redirect()->back()->withErrors(['title' => 'the title already been taken']);
 //        }
 

@@ -12,11 +12,11 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    // روی همه کنترلر ها، این میدلور ها را با ورودی های مختلف فراخوانی بکنیم
+    // فراخوانی میدلورها
     public function __construct()
     {
         // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
-        $this->middleware(CheckPermission::class . ":read-post")
+        $this->middleware("permission:read-post")
             ->only('index');
 
 
@@ -32,8 +32,6 @@ class PostController extends Controller
 
         $this->middleware(CheckPermission::class . ":delete-post")
             ->only('destroy');
-
-
     }
 
 
@@ -42,7 +40,13 @@ class PostController extends Controller
     // show posts
     public function index()
     {
+
+        //dd(auth()->user()->role->toArray());
+        //dd(auth()->user()->role->permissions->toArray());
+        //dd(auth()->user()->role->permissions()->where('id','=','3')->first());
+
         // گرفتن تمامی پست ها توسط مدل پست
+
         $post = Post::all();
         $categories = Category::all();
 

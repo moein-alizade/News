@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -15,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -30,14 +31,19 @@ class AuthServiceProvider extends ServiceProvider
         //  گیت ها تقریبا ساختاری مشابه روت ها دارند
         // define('تابع اکشن', 'دسترسی');
         Gate::define('create-category', function(User $user) {
-            return $user->role->hasPermission('create-category');
+            $permission = Permission::where('title', '=' , 'update-category')->first();
+            return $user->role->hasPermission($permission);
         });
 
 
+
+         // اگه کاربر دسترسی ویرایش دسته بندی را داشت و دسته بندی معتبر و وجود داشت آنگاه بهش دسترسی ویراش دسته بندی را بده
         Gate::define('edit-category', function(User $user, Category $category) {
-            // دسته بندی که سمت ما می آید حتما خالی نباشد
-            return $user->role->hasPermission('update-category')
-                    && !empty($category);
+
+            $permission = Permission::where('title', '=' , 'update-category')->first();
+
+            return $user->role->hasPermission($permission)
+                && !empty($category);
         });
 
 
