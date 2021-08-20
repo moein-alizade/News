@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-
     public function show()
     {
         // نمایش اطلاعات کاربر فعلی که لاگین کرده است

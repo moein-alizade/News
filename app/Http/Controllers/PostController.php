@@ -11,30 +11,13 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-
     // فراخوانی میدلورها
     public function __construct()
     {
         // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
         $this->middleware("permission:read-post")
             ->only('index');
-
-
-        // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
-        $this->middleware(CheckPermission::class . ":create-post")
-            ->only(['create', 'store']);
-
-
-        $this->middleware(CheckPermission::class . ":edit-post")
-            ->only(['edit','update']);
-
-
-
-        $this->middleware(CheckPermission::class . ":delete-post")
-            ->only('destroy');
     }
-
-
 
 
     // show posts

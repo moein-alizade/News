@@ -31,7 +31,9 @@ class AuthServiceProvider extends ServiceProvider
         //  گیت ها تقریبا ساختاری مشابه روت ها دارند
         // define('تابع اکشن', 'دسترسی');
         Gate::define('create-category', function(User $user) {
-            $permission = Permission::where('title', '=' , 'update-category')->first();
+
+            $permission = Permission::where('title', '=', 'update-category')->first();
+
             return $user->role->hasPermission($permission);
         });
 
@@ -40,7 +42,7 @@ class AuthServiceProvider extends ServiceProvider
          // اگه کاربر دسترسی ویرایش دسته بندی را داشت و دسته بندی معتبر و وجود داشت آنگاه بهش دسترسی ویراش دسته بندی را بده
         Gate::define('edit-category', function(User $user, Category $category) {
 
-            $permission = Permission::where('title', '=' , 'update-category')->first();
+            $permission = Permission::where('title', '=', 'update-category')->first();
 
             return $user->role->hasPermission($permission)
                 && !empty($category);

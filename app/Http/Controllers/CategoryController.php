@@ -21,16 +21,15 @@ class CategoryController extends Controller
 
 
         // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
-        $this->middleware(CheckPermission::class . ":create-category")
-            ->only(['create', 'store']);
+        // $this->middleware("permission:create-category")
+        //    ->only(['create', 'store']);
 
 
-        $this->middleware(CheckPermission::class . ":edit-category")
-            ->only(['edit','update']);
+        $this->middleware("permission:edit-category")
+            ->only(['edit', 'update']);
 
 
-
-        $this->middleware(CheckPermission::class . ":delete-category")
+        $this->middleware("permission:delete-category")
             ->only('destroy');
     }
 
@@ -55,7 +54,7 @@ class CategoryController extends Controller
 
         if(!Gate::allows('create-category'))
         {
-            abort(403);
+            return abort(403);
         }
 
         return view('categories.create');
@@ -94,8 +93,6 @@ class CategoryController extends Controller
         // if (Gate::denies('edit-category', $category)){
         //     return abort(403);
         // }
-
-
 
 
 
