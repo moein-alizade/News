@@ -9,6 +9,18 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    // فراخوانی میدلورها
+    public function __construct()
+    {
+        // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
+        // $this->middleware("permission:read-user")
+        //    ->only('index');
+
+
+        // $this->middleware("permission:delete-user")
+        //    ->only('destroy');
+    }
+
     public function index()
     {
         // Seve all users in a $users

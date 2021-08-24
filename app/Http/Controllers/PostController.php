@@ -15,8 +15,11 @@ class PostController extends Controller
     public function __construct()
     {
         // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
-        $this->middleware("permission:read-post")
-            ->only('index');
+        // $this->middleware("permission:read-post")
+        //    ->only('index');
+
+        // $this->middleware("permission:delete-post")
+        //    ->only('destroy');
     }
 
 

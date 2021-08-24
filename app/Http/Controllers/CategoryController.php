@@ -19,15 +19,12 @@ class CategoryController extends Controller
         $this->middleware("permission:read-category")
             ->only('index');
 
-
         // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
-        // $this->middleware("permission:create-category")
-        //    ->only(['create', 'store']);
+        $this->middleware("permission:create-category")
+            ->only(['create', 'store']);
 
-
-        $this->middleware("permission:edit-category")
+        $this->middleware("permission:update-category")
             ->only(['edit', 'update']);
-
 
         $this->middleware("permission:delete-category")
             ->only('destroy');
@@ -52,10 +49,13 @@ class CategoryController extends Controller
         // dd(Gate::allows('create-category'));
 
 
-        if(!Gate::allows('create-category'))
-        {
-            return abort(403);
-        }
+        // if(!Gate::allows('create-category'))
+        // {
+        //    abort(403);
+        // }
+
+        Gate::authorize('create-category');
+
 
         return view('categories.create');
 
@@ -64,10 +64,12 @@ class CategoryController extends Controller
 
     public function store(NewCategoryRequest $request)
     {
+        //// dd($request);
 // ذخیره دسته بندی
         Category::query()->create([
            'title' => $request->get('title')
         ]);
+
 
         return redirect('/');
     }
@@ -77,8 +79,9 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
+
         //        if (!Gate::allows('edit-category', $category)){
-        //            return abort(403);
+        //            abort(403);
         //        }
         //
         //        return view('categories.edit', [
@@ -95,10 +98,12 @@ class CategoryController extends Controller
         // }
 
 
+        // dd($category);
 
         // authorize() => auto exception = true هویت اش درست هست یا نه
         Gate::authorize('edit-category', $category);
 
+        // dd($category);
 
         return view('categories.edit', [
             'category' => $category
@@ -110,7 +115,6 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-
         // authorize() => auto exception = true
         Gate::authorize('edit-category', $category);
 

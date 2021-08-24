@@ -10,12 +10,16 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+
     // فراخوانی میدلورها
     public function __construct()
     {
         // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
-        $this->middleware("permission:read-role")
-            ->only('index');
+        // $this->middleware("permission:read-role")
+        //    ->only('index');
+
+        // $this->middleware("permission:delete-role")
+        //    ->only('destroy');
     }
 
 
