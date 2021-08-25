@@ -34,9 +34,8 @@ class CheckPermission
             ->firstOrFail();
 
 
-
         // چک کنیم کاربری که لاگین کرده، آیا دسترسی خاصی را دارد یا خیر
-        //// dd(auth()->user()->role->hasPermission($permission));
+        // dd(auth()->user()->role->hasPermission($permission));
 
 
 

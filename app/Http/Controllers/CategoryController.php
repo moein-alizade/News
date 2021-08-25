@@ -6,6 +6,7 @@ use App\Http\Middleware\CheckPermission;
 use App\Http\Requests\NewCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
@@ -23,8 +24,8 @@ class CategoryController extends Controller
         $this->middleware("permission:create-category")
             ->only(['create', 'store']);
 
-        $this->middleware("permission:update-category")
-            ->only(['edit', 'update']);
+//        $this->middleware("permission:update-category")
+//            ->only(['edit', 'update']);
 
         $this->middleware("permission:delete-category")
             ->only('destroy');
@@ -98,10 +99,55 @@ class CategoryController extends Controller
         // }
 
 
-        // dd($category);
+        //dd($category);
 
         // authorize() => auto exception = true هویت اش درست هست یا نه
-        Gate::authorize('edit-category', $category);
+        // Gate::authorize('edit-category', $category);
+
+
+
+        // (Gate::check('edit-category', $category) => چک می کند که اون دسترسی برای آن کاربر وجود دارد یا نه
+        //        if(!Gate::check('edit-category', $category))
+        //        {
+        //            abort('403');
+        //        }
+
+
+        // (Gate::any(['edit-category', 'create-category'], $category) => کن true هر کدام از این دسترسی ها رو داشت
+        // در صورتی که هیچ کدوم از دسترسی ها رو نداشت، در نهایت نتیجه if = true و کدهاش اجرا بشود
+        //        if(!Gate::any(['edit-category', 'create-category'], $category))
+        //        {
+        //            abort('403');
+        //        }
+
+
+
+        // (Gate::none(['edit-category'], $category)
+        // (Gate::none(['edit-category', 'create-category'], $category) => اگه هیچ کدوم از این دسترسی ها برای کاربر وجود نداشت آنگاه صفحه 403 را نشان بده
+        //        if(Gate::none(['edit-category', 'create-category'], $category))
+        //        {
+        //            abort('403');
+        //        }
+
+
+
+
+
+        $user = User::query()
+            ->where('name', 'john')
+            ->firstOrFail();
+
+
+        // (Gate::forUser($user)->none(['edit-category', 'create-category'], $category) =>  احراز هویت روی کاربری غیر از کاربری که لاگین کرده است و اونی که مدنظر ما هست
+        if(Gate::forUser($user)->none(['edit-category', 'create-category'], $category))
+        {
+            abort('403');
+        }
+
+
+
+
+
 
         // dd($category);
 
