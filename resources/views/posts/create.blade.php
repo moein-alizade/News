@@ -10,10 +10,10 @@
                         <form action="/posts/store" method="POST">
                             @csrf
                             <div class="form-group">
-                                <input type="text" name="title" class="form-control" placeholder="Subject" />
+                                <input type="text" name="title" class="form-control" placeholder="title" />
                             </div>
                             <div class="form-group">
-                                <input type="text" name="slug" class="form-control" placeholder="Subject" />
+                                <input type="text" name="slug" class="form-control" placeholder="slug" />
                             </div>
                             <div class="form-group">
                                 <select name="category_id" id="category_id" class="form-control">
@@ -24,7 +24,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <textarea name="body" class="form-control" rows="5" placeholder="Message"></textarea>
+                                <textarea name="body" class="form-control" rows="5" placeholder="content"></textarea>
                             </div>
                             <div><button class="btn" type="submit">Send Message</button></div>
                         </form>

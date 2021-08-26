@@ -36,8 +36,12 @@ class CategoryController extends Controller
 
     public function index()
     {
+        Gate::authorize('read-category');
+
+        $categories = Category::all();
+
         return view('categories.index',[
-            'categories' => Category::all()
+            'categories' => $categories
         ]);
     }
 
@@ -193,11 +197,10 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-// اگه تعداد پست هایش بزرگتر از 0 بود آنگاه آن را به صفحه ی قبل با خطای مربوطه بر می گردانیم در غیر این صورت آن را پاک می کنیم
-        if ($category->posts->count() > 0)
-        {
-            return back()->withErrors(['category can not be deleted']);
-        }
+
+        // authorization delete category
+        Gate::authorize('delete-category', $category);
+
 
         $category->delete();
 
