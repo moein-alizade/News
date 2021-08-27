@@ -21,14 +21,18 @@ class CategoryController extends Controller
             ->only('index');
 
         // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
-        $this->middleware("permission:create-category")
-            ->only(['create', 'store']);
+//        $this->middleware("permission:create-category")
+//            ->only(['create', 'store']);
 
 //        $this->middleware("permission:update-category")
 //            ->only(['edit', 'update']);
 
         $this->middleware("permission:delete-category")
             ->only('destroy');
+
+
+        // authorizeResource() -> اعمال بشه را براش بعنوان پارامتر بفرستیم authorization مدلی که قراره که
+        $this->authorizeResource(Category::class, 'category');
     }
 
 
@@ -36,7 +40,9 @@ class CategoryController extends Controller
 
     public function index()
     {
-        Gate::authorize('read-category');
+        // Gate::authorize('read-category');
+        // $this->authorize('read-category');
+
 
         $categories = Category::all();
 
@@ -59,7 +65,14 @@ class CategoryController extends Controller
         //    abort(403);
         // }
 
-        Gate::authorize('create-category');
+        //$this->authorize('create-category');
+
+
+        // latest() -> بر اساس تاریخ ایجادشون مرتب شوند و جدیدترین کاربر اول و بالاتر قرار بگیرد
+        // $user = User::query()->latest()->first();
+
+        // احراز هویت روی کاربری بجز کاربر فعلی مان
+        // $this->authorizeForUser($user ,'create-category');
 
 
         return view('categories.create');
@@ -166,7 +179,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         // authorize() => auto exception = true
-        Gate::authorize('edit-category', $category);
+        // $this->authorize('edit-category', $category);
 
 
         // داخل جدول  category می گردیم که آیا این عنوان قبلا استفاده شده و یا نه و اگه استفاده شده باید برای پستی غیر از پستی که در حال حاضر در حال ویرایش اش هستیم، استفاده شده باشد و اگه نه ارور لازم نیست
@@ -199,7 +212,7 @@ class CategoryController extends Controller
     {
 
         // authorization delete category
-        Gate::authorize('delete-category', $category);
+        // $this->authorize('delete-category', $category);
 
 
         $category->delete();
