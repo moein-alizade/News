@@ -26,8 +26,6 @@ class NewRoleRequest extends FormRequest
         return [
             'title' => ['required', 'min:4', 'max:50'],
             'permissions' => ['array'],
-            // چک کنیم ببینیم آیدی هاش معتبر هست و یا نه یعنی حتما توی دیتابیس مان موجود باشد
-            // .*   =>  all indexes into this array
             'permissions.*' => ['exists:permissions,id'],
         ];
     }

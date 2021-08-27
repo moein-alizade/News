@@ -87,39 +87,29 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="/" class="nav-item nav-link active">Home</a>
+                    <a href="/" class="nav-item nav-link active">home</a>
 
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">categories</a>
                         <div class="dropdown-menu">
-
-                            {{--  @can()   @endcan   =>   بررسی دسترسی ها داخل بلیدها  --}}
                             @can('read-category', \App\Models\Category::class)
-                                <a href="/categories" class="dropdown-item">List</a>
+                                <a href="/categories" class="dropdown-item">list</a>
                             @endcan
 
                             @can('create-category', \App\Models\Category::class)
-                                <a href="/categories/create" class="dropdown-item">New</a>
+                                <a href="/categories/create" class="dropdown-item">new</a>
                             @endcan
-
                         </div>
                     </div>
 
+                    <a href="/posts/create" class="nav-item nav-link">new post</a>
 
-
-                    <a href="/posts/create" class="nav-item nav-link">New Post</a>
-
-
-
-
-                    {{-- @auth = if   =>       یعنی اگه کاربر لاگین بود فلان کار رو انجام بده و اگه نه فلان کار دیگه را انجام بده                   --}}
                     @auth
                         @canany('manage-roles')
                             <a href="/roles" class="nav-item nav-link">roles</a>
                         @endcanany
 
-
-                        <a href="/profile" class="nav-item nav-link">Profile</a>
+                        <a href="/profile" class="nav-item nav-link">profile</a>
                         <a href="" class="nav-item nav-link">
                             <form action="/logout" method="post">
                                 @csrf
@@ -128,13 +118,8 @@
                             </form>
                         </a>
                     @else
-                        <a href="/login" class="nav-item nav-link">Login</a>
+                        <a href="/login" class="nav-item nav-link">login</a>
                     @endauth
-
-
-
-
-
                 </div>
                 <div class="social ml-auto">
                     <a href=""><i class="fab fa-twitter"></i></a>

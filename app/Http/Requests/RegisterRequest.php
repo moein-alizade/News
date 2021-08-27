@@ -14,10 +14,6 @@ class RegisterRequest extends FormRequest
 
     public function authorize()
     {
-        // کاربر ما اجازه ی فرستادن request دارد یا خیر؟ به نوعی اجازه ی عبور کردن ما را می دهد و درخواستی که سمت ما اومده معتبر هست یا خیر؟
-        // return true;
-
-        // در صورتی که کاربر لاگین نبود آنگاه اجازه ی ثبت نام داشته باشد
         return !auth()->check();
     }
 

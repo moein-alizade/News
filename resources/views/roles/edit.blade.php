@@ -18,14 +18,10 @@
                             <div class="from-group">
                                 @foreach($permissions as $permission)
                                     <lable class="ml-2">
-                                        {{--   name="permissions[]" => عنوانش را باید بصورت یک آرایه پاس بدهیم زیرا مجموعه ی دسترسی در نهایت قرار هست بررسی شود  --}}
-                                        {{--  داخل دسترسی های این رول، وجود داشته باشد این دسترسی که اکنون در حال پیمایش هست  --}}
-                                        {{--   می خواهیم بدانیم دسترسی جاری مون برای دسترسی های این رول خاص وجود دارد و یا نه  --}}
                                         <input
-                                        {{--    @if($role->permissions()->where('permission_id', $permission->id)->exists())    --}}
                                         @if($role->hasPermission($permission->title))
-                                                 checked
-                                            @endif
+                                             checked
+                                        @endif
                                             type="checkbox" name="permissions[]" value="{{$permission->id}}">{{$permission->title}}
                                     </lable>
                                 @endforeach

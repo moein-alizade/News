@@ -6,14 +6,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                {{--  @canany ⇒  را به ما نشان میدهد can میشه و دستورات داخل بلاک true بررسی می کند که یک کدام از دسترسی ها اگه وجود داشت آنگاه نتیجه      --}}
                     @can('create-category', \App\Models\Category::class)
                         <div class="contact-form">
                             <form action="/categories/store" method="POST">
                                 @csrf
                                 <h2>Create new category</h2>
                                 <div class="form-group">
-                                    <input type="text" name="title" class="form-control" placeholder="Title" />
+                                    <input type="text" name="title" class="form-control" placeholder="title" />
                                 </div>
 
                                 <div><button class="btn" type="submit">Send Message</button></div>

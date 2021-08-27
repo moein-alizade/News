@@ -21,7 +21,6 @@
                                 <input type="text" name="mobile" class="form-control" placeholder="Title" value="{{$users->mobile}}"/>
                             </div>
 
-                            {{--  ویرایش نقش کاربر  --}}
                             <div class="form-group col-md-12">
                                 <select name="role_id" id="role_id" class="form-control">
                                     @foreach($roles as $role)

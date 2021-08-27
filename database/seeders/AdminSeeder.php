@@ -20,13 +20,8 @@ class AdminSeeder extends Seeder
             'title' => 'admin'
         ]);
 
-
-        // اختصاص دادن تمام دسترسی های موجود به کاربر ادمین
         $admin->permissions()->attach(Permission::all());
 
-
-        // Insert admin user to database
-        // insert() => چون نتیجه اش را نمی خواهیم هر جایی ذخیره کنیم یا برگردانیم
         User::query()->insert([
             'role_id' => $admin->id,
             'name' => 'moein',
@@ -34,7 +29,5 @@ class AdminSeeder extends Seeder
             'email' => 'moein@gmail.com',
             'password' => bcrypt('12345')
         ]);
-
-
     }
 }

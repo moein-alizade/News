@@ -9,7 +9,6 @@
                     <div class="contact-form">
                         <form action="/posts/{{   $post->slug   }}" method="POST">
                             @csrf
-                            {{-- ست کردن متد دلخواه ما توسط لاراول --}}
                             @method('PATCH')
                             <div class="form-group">
                                 <input type="text" name="title" class="form-control" placeholder="Subject" value="{{   $post->title   }}" />
@@ -22,12 +21,10 @@
                                     <option value="" disabled selected>Select category ...</option>
                                     @foreach($categories as $category)
                                         <option
-                                            {{--   نمایش دسته بندی که از قبل انتخاب شده است  --}}
                                             @if($category->id == $post->category_id)
                                                 selected
                                             @endif
                                         value="{{$category->id}}">{{$category->title}}</option>
-
                                     @endforeach
                                 </select>
                             </div>

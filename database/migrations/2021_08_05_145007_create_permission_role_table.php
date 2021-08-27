@@ -16,10 +16,7 @@ class CreatePermissionRoleTable extends Migration
         Schema::create('permission_role', function (Blueprint $table) {
             $table->foreignId('permission_id')->constrained();
             $table->foreignId('role_id')->constrained();
-
-             // این دو تا فیلد را یکتا در نظر بگیر و در واقع همان تعیین کلید اصلی جدول است
             $table->primary(['permission_id', 'role_id']);
-
             $table->timestamps();
         });
     }

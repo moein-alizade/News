@@ -9,21 +9,20 @@
                     <div class="contact-form">
                         <form action="/roles/store" method="POST">
                             @csrf
-                            <h2>Create new Role</h2>
+                            <h2>Create new role</h2>
                             <div class="form-group">
-                                <input type="text" name="title" class="form-control" placeholder="Title" />
+                                <input type="text" name="title" class="form-control" placeholder="title" />
                             </div>
 
                             <div class="from-group">
                                 @foreach($permissions as $permission)
-                                    <lable class="ml-2">
-                                    {{--   name="permissions[]" => عنوانش را باید بصورت یک آرایه پاس بدهیم زیرا مجموعه ی دسترسی در نهایت قرار هست بررسی شود  --}}
-                                        <input type="checkbox" name="permissions[]" value="{{$permission->id}}">{{$permission->title}}
+                                    <lable>
+                                        <input type="checkbox" name="permissions[]" value="{{$permission->id}}" class="m-1">{{$permission->title}}<br>
                                     </lable>
                                 @endforeach
                             </div>
 
-                            <div><button class="btn" type="submit">Submit</button></div>
+                            <div><button class="btn mt-2" type="submit">Submit</button></div>
                         </form>
 
                         @include('layout.errors')

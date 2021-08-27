@@ -14,16 +14,11 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-// ایجاد فیلد آیدی به عنوان کلید اصلی و بدون علامت
             $table->id();
-
-            // constrained() => رابطه ی بین جداول را پیاده سازی می کند
             $table->foreignId('category_id')->constrained();
             $table->string('slug')->unique();
             $table->string('title');
             $table->text('body');
-
-// ایجاد فیلد های تاریخ ایجاد و آپدیت
             $table->timestamps();
         });
     }

@@ -15,32 +15,23 @@ class LoginController extends Controller
         return view('login.create');
     }
 
-    // بازیابی کاربر
+
     public function store(LoginRequest $request)
     {
-        // نمایش دادن اولین کاربر با این موبایل
         $user = User::query()
             ->where('mobile', $request->get('mobile'))
             ->firstOrFail();
 
-        // برای نمایش اطلاعات کاربر
-        // dd($user->toArray());
-
-        // چک کردن رمز ورودی کاربر با رمز واقعی اش
         if (! Hash::check($request->get('password'), $user->password))
         {
-            // key => 'password' = برای مشخص کردن فیلدی که ایراد دارد هست
             return back()->withErrors(['password' => 'password is wrong']);
         }
 
-        // لاگین کردن کاربر
         auth()->login($user);
-
         return redirect('/');
 
     }
 
-    // logout
     public function destroy()
     {
         auth()->logout();

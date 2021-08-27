@@ -55,13 +55,10 @@ class CategoryPolicy
      */
     public function update(User $user, category $category)
     {
-        // چک می کند که یوزر دسترسی update-category را دارد یا خیر
         $isAuthorized =  $user->role->hasPermission('update-category')
             && !empty($category);
 
 
-
-        // برای نمایش اعلان خطای سفارشی شده ی ما
         return $isAuthorized
             ? Response::allow()
             : Response::deny('شما مجاز نیستید');
@@ -77,9 +74,6 @@ class CategoryPolicy
      */
     public function delete(User $user, category $category)
     {
-        // $user->role->hasPermission($permission) => کاربر دسترسی حذف دسته بندی را دارد یا نه
-        // !empty($category) => این دسته بندی حتما باید وجود داشته باشد
-        // $category->posts()->count() == 0 => تعداد پست های آن دسته بندی، صفر باشد
         return $user->role->hasPermission('delete-category')
             && !empty($category)
             && $category->posts()->count() == 0;
