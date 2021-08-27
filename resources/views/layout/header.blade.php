@@ -92,8 +92,16 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Categories</a>
                         <div class="dropdown-menu">
-                            <a href="/categories" class="dropdown-item">List</a>
-                            <a href="/categories/create" class="dropdown-item">New</a>
+
+                            {{--  @can()   @endcan   =>   بررسی دسترسی ها داخل بلیدها  --}}
+                            @can('read-category', \App\Models\Category::class)
+                                <a href="/categories" class="dropdown-item">List</a>
+                            @endcan
+
+                            @can('create-category', \App\Models\Category::class)
+                                <a href="/categories/create" class="dropdown-item">New</a>
+                            @endcan
+
                         </div>
                     </div>
 

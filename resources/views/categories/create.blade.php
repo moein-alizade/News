@@ -6,20 +6,28 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <div class="contact-form">
-                        <form action="/categories/store" method="POST">
-                            @csrf
-                            <h2>Create new category</h2>
-                            <div class="form-group">
-                                <input type="text" name="title" class="form-control" placeholder="Title" />
-                            </div>
+                {{--  @canany ⇒  را به ما نشان میدهد can میشه و دستورات داخل بلاک true بررسی می کند که یک کدام از دسترسی ها اگه وجود داشت آنگاه نتیجه      --}}
+                    @can('create-category', \App\Models\Category::class)
+                        <div class="contact-form">
+                            <form action="/categories/store" method="POST">
+                                @csrf
+                                <h2>Create new category</h2>
+                                <div class="form-group">
+                                    <input type="text" name="title" class="form-control" placeholder="Title" />
+                                </div>
 
-                            <div><button class="btn" type="submit">Send Message</button></div>
-                        </form>
+                                <div><button class="btn" type="submit">Send Message</button></div>
+                            </form>
 
-                        @include('layout.errors')
+                            @include('layout.errors')
 
-                    </div>
+                        </div>
+                    @elsecan('read-category', \App\Models\Category::class)
+                        <div class="contact-form">
+                            <h1>This action is not authorized</h1>
+                            <a href="/categories">View categories</a>
+                        </div>
+                    @endcan
                 </div>
                 <div class="col-md-4">
                     <div class="contact-info">

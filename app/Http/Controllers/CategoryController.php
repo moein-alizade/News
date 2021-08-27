@@ -12,32 +12,6 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-
-    // فراخوانی میدلورها
-    public function __construct()
-    {
-        // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
-        $this->middleware("permission:read-category")
-            ->only('index');
-
-        // کاربری بتواند برای تابع store، درخواست بفرستد که دسترسی ایجاد دسته بندی را داشته باشد
-//        $this->middleware("permission:create-category")
-//            ->only(['create', 'store']);
-
-//        $this->middleware("permission:update-category")
-//            ->only(['edit', 'update']);
-
-        $this->middleware("permission:delete-category")
-            ->only('destroy');
-
-
-        // authorizeResource() -> اعمال بشه را براش بعنوان پارامتر بفرستیم authorization مدلی که قراره که
-        $this->authorizeResource(Category::class, 'category');
-    }
-
-
-
-
     public function index()
     {
         // Gate::authorize('read-category');
