@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 use App\Policies\CategoryPolicy;
 use Illuminate\Auth\Access\Response;
@@ -73,6 +74,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-category', [CategoryPolicy::class, 'delete']);
 
 
+        // call back function => check all methode
+        Gate::define('manage-roles', function (User $user){
+           return auth()->check() && auth()->user()->role->hasPermission('manage-roles');
+        });
 
     }
 }

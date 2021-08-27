@@ -7,6 +7,8 @@ use App\Http\Requests\NewPostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Role;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -31,8 +33,10 @@ class PostController extends Controller
         //dd(auth()->user()->role->permissions->toArray());
         //dd(auth()->user()->role->permissions()->where('id','=','3')->first());
 
-        // گرفتن تمامی پست ها توسط مدل پست
 
+        // Gate::authorize('manage-roles');
+
+        // گرفتن تمامی پست ها توسط مدل پست
         $post = Post::all();
         $categories = Category::all();
 
@@ -70,7 +74,7 @@ class PostController extends Controller
 
         // create()  => این تابع برای ایجاد رکورد جدید در دیتابیس هست
         Post::query()->create([
-            'category_id' => $request->get('category_id'),
+           'category_id' => $request->get('category_id'),
            'slug' => $request->get('slug'),
            'title' => $request->get('title'),
            'body' => $request->get('body'),

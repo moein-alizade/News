@@ -7,21 +7,15 @@ use App\Http\Requests\NewRoleRequest;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
 
-    // فراخوانی میدلورها
     public function __construct()
     {
-        // فقط رو تابع ایندکس وجود دسترسی خواندن دسته بندی را چک کن
-        // $this->middleware("permission:read-role")
-        //    ->only('index');
-
-        // $this->middleware("permission:delete-role")
-        //    ->only('destroy');
+        // Gate::authorize('manage-roles');
     }
-
 
    // show list roles
     public function index()

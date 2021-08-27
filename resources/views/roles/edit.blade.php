@@ -23,7 +23,7 @@
                                         {{--   می خواهیم بدانیم دسترسی جاری مون برای دسترسی های این رول خاص وجود دارد و یا نه  --}}
                                         <input
                                         {{--    @if($role->permissions()->where('permission_id', $permission->id)->exists())    --}}
-                                        @if($role->hasPermission($permission))
+                                        @if($role->hasPermission($permission->title))
                                                  checked
                                             @endif
                                             type="checkbox" name="permissions[]" value="{{$permission->id}}">{{$permission->title}}

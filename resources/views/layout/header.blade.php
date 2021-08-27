@@ -105,11 +105,20 @@
                         </div>
                     </div>
 
+
+
                     <a href="/posts/create" class="nav-item nav-link">New Post</a>
+
+
 
 
                     {{-- @auth = if   =>       یعنی اگه کاربر لاگین بود فلان کار رو انجام بده و اگه نه فلان کار دیگه را انجام بده                   --}}
                     @auth
+                        @canany('manage-roles')
+                            <a href="/roles" class="nav-item nav-link">roles</a>
+                        @endcanany
+
+
                         <a href="/profile" class="nav-item nav-link">Profile</a>
                         <a href="" class="nav-item nav-link">
                             <form action="/logout" method="post">
@@ -121,6 +130,8 @@
                     @else
                         <a href="/login" class="nav-item nav-link">Login</a>
                     @endauth
+
+
 
 
 

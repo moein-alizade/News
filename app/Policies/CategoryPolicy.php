@@ -20,8 +20,7 @@ class CategoryPolicy
      */
     public function viewAny(User $user)
     {
-        $permission = Permission::where('title', 'read-category')->first();
-        return $user->role->hasPermission($permission);
+        return $user->role->hasPermission('read-category');
     }
 
     /**
@@ -44,8 +43,7 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-        $permission = Permission::where('title', 'create-category')->first();
-        return $user->role->hasPermission($permission);
+        return $user->role->hasPermission('create-category');
     }
 
     /**
@@ -57,9 +55,8 @@ class CategoryPolicy
      */
     public function update(User $user, category $category)
     {
-        $permission = Permission::where('title', 'update-category')->first();
         // چک می کند که یوزر دسترسی update-category را دارد یا خیر
-        $isAuthorized =  $user->role->hasPermission($permission)
+        $isAuthorized =  $user->role->hasPermission('update-category')
             && !empty($category);
 
 
@@ -80,12 +77,10 @@ class CategoryPolicy
      */
     public function delete(User $user, category $category)
     {
-        $permission = Permission::where('title', 'delete-category')->first();
-
         // $user->role->hasPermission($permission) => کاربر دسترسی حذف دسته بندی را دارد یا نه
         // !empty($category) => این دسته بندی حتما باید وجود داشته باشد
         // $category->posts()->count() == 0 => تعداد پست های آن دسته بندی، صفر باشد
-        return $user->role->hasPermission($permission)
+        return $user->role->hasPermission('delete-category')
             && !empty($category)
             && $category->posts()->count() == 0;
 
