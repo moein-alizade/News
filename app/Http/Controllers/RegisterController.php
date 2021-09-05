@@ -19,12 +19,17 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request)
     {
+
+        $normalUser = Role::query()->where('title', 'normal user')->first();
+
+
         $user = User::query()->create([
+            // 'role_id' => Role::where('title', '=', 'client')->first()->id,
+           'role_id' => $normalUser->id,
            'name' => $request->get('name') ,
            'email' => $request->get('email') ,
            'mobile' => $request->get('mobile') ,
            'password' => bcrypt($request->get('password')),
-           'role_id' => Role::where('title', '=', 'client')->first()->id,
         ]);
 
 
